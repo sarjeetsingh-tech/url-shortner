@@ -8,7 +8,14 @@ const access = async (req, res) => {
     // console.log(url.originalURL);
     if (url) {
         const count = url.clickCount;
-        await Url.findByIdAndUpdate(url._id, { clickCount: 1 + count });
+        await Url.findByIdAndUpdate(url._id, {
+            $set: {
+                clickCount: count + 1,
+            },
+            $push: {
+                clickTimestamps: new Date(),
+            },
+        });
         res.redirect(url.originalURL);
     }
     else {
@@ -52,12 +59,7 @@ const details = async (req, res) => {
     const id = req.params.id;
     const url = await Url.findOne({ shortURLKey: id });
     if (url) {
-        res.json({
-            originalURL: url.originalURL,
-            shortenURL: url.shortURLKey,
-            clickCount: url.clickCount,
-            creationTime: url.createdAt
-        })
+        res.json(url);
     } else {
         json.send("invalid url");
     }
