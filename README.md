@@ -73,10 +73,19 @@ Endpoint: GET /:id/details
 Response:
 ```json
 {
-  "originalURL": "https://www.example.com",
-  "shortenURL": "abc123",
-  "clickCount": 5,
-  "creationTime": "2023-01-01T12:34:56.789Z"
+    "_id": "658ff7d33082a7c5ddc45fed",
+    "originalURL": "https://github.com/example",
+    "shortURLKey": "tjj4kfN0Cs",
+    "createdAt": "2023-12-30T10:58:27.331Z",
+    "clickCount": 7,
+    "__v": 0,
+    "clickTimestamps": [
+        "2023-12-30T11:08:50.295Z",
+        "2023-12-30T11:08:53.882Z",
+        "2023-12-30T11:08:55.368Z",
+        "2023-12-30T11:08:58.867Z",
+        "2023-12-30T11:09:00.877Z"
+    ]
 }
 ```
 
