@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        .section1 {
+            display: flex;
+            width: 70%;
+            flex-direction: column;
+            height: 30vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section2 {
+            display: flex;
+            width: 70%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            margin: 0 auto;
+
+            border-collapse: separate;
+
+            border-spacing: 0 4px;
+
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+
+            padding: 20px;
+            text-align: left;
+        }
+
+        tr {
+            background-color: #343a40;
+            color: white;
+            font-size: x-small;
+            font-weight: lighter;
+            letter-spacing: 2px;
+
+        }
+
+        .i {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 40px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .o {
+            width: 100%;
+            /* border: 2px solid black; */
+            height: 40px;
+        }
+
+        input {
+            height: 100%;
+            width: 80%;
+            margin-right: 5px;
+
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            height: 45px;
+            width: 20%;
+            font-size: larger;
+            font-weight: lighter;
+
+        }
+
+
+        p {
+            color: white;
+        }
+        #copyToClipBoard{
+            height: 30px;
+            width: 50px;
+            font-size: 3px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #2b3035;">
+    <div class="main">
+        <div class="section1">
+            <div class="i">
+                <form action="/url/shorten" method="post">
+                    <input type="text" name="originalURL" id="originalURL" placeholder="https://www.example.com">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="o">
+                <% if (locals.id) { %>
+                    <p>Generated URL : <a id="shortId" href="http://localhost:3000/url/<%= id %>"
+                            style="color: white;">http://localhost:3000/url/<%= id %></a> <button id="copyToClipBoard"
+                            onclick="copyToClipBoard()">Copy text</button>
+                    </p>
+                    <% } %>
+            </div>
+        </div>
+        <div class="section2">
+            <% if (allUrls.length) { %>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Shorten Url</th>
+                        <th>Original Url</th>
+                        <th>Clicks</th>
+                    </tr>
+                    <% allUrls.forEach((url, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                                <%= url.shortURLKey %>
+                            </td>
+                            <td>
+                                <%= url.originalURL %>
+                            </td>
+                            <td>
+                                <%= url.clickCount %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </table>
+                <% } %>
+        </div>
+    </div>
+    <script>
+        function copyToClipBoard() {
+            // Get the URL text
+            var urlText = document.getElementById("shortId").innerText;
+
+            // Create a hidden input element
+            var tempInput = document.createElement("input");
+            tempInput.value = urlText;
+            document.body.appendChild(tempInput);
+
+            // Select the input field
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the input field
+            document.execCommand("copy");
+
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+
+            const btn=document.getElementById("copyToClipBoard");
+            btn.innerHTML="Text copied!"
+
+
+            // Alert the user
+            alert("Copied the text: " + urlText);
+        }
+    </script>
+
+</body>
+
+</html>

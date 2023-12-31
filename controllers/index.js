@@ -5,7 +5,6 @@ const validator = require("validator");
 const access = async (req, res) => {
     const id = req.params.id;
     const url = await Url.findOne({ shortURLKey: id });
-    // console.log(url.originalURL);
     if (url) {
         const count = url.clickCount;
         await Url.findByIdAndUpdate(url._id, {
@@ -26,15 +25,16 @@ const access = async (req, res) => {
 const createShortenUrl = async (req, res) => {
     console.log(req.body);
     const { originalURL } = req.body;
-    const uniqueId = shortid.generate();
+
     if (validator.isURL(originalURL)) {
         try {
+            let shortURLKey;
             let url = await Url.findOne({ originalURL });
             if (url) {
-                res.json(originalURL);
+                shortURLKey = url.shortURLKey;
             }
             else {
-                const shortURLKey = shortid.generate();
+                shortURLKey = shortid.generate();
                 url = new Url({
                     originalURL,
                     shortURLKey,
@@ -42,8 +42,9 @@ const createShortenUrl = async (req, res) => {
                     clickCount: 0,
                 });
                 await url.save();
-                res.json(shortURLKey);
             }
+            const allUrls = await Url.find({});
+            res.render("home.ejs", { id: shortURLKey, allUrls: allUrls });
         }
         catch (err) {
             console.log(err);
