@@ -15,6 +15,8 @@ A simple URL shortener API built with Node.js, Express, and MongoDB.
 - [Contributing](#contributing)
 
 ## Overview
+![image](https://github.com/sarjeetsingh-tech/url-shortner/assets/104495979/e1028c2b-dede-4356-856b-daa973a32189)
+
 
 This API provides URL shortening functionality, allowing users to create short URLs, access the original URLs through the short ones, and retrieve details about the shortened URLs.
 
