@@ -5,6 +5,10 @@ const newSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     clickCount: { type: Number, default: 0 },
     clickTimestamps: [{ type: Date }],
+    generatedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
+    }
 })
-const Url=mongoose.model("url",newSchema);
-module.exports=Url;
+const Url = mongoose.model("url", newSchema);
+module.exports = Url;

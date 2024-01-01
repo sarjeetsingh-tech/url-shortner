@@ -4,188 +4,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URL Shortener</title>
     <style>
-        .main {
+        body {
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin-top: 0; /* Remove space at the top */
+        }
+
+        .navbar {
+            background-color: #e9ecef;
+            padding: 10px;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: #343a40;
+        }
+
+        .container {
+            
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
+        .form-section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-
-        .section1 {
+        form {
             display: flex;
-            width: 70%;
             flex-direction: column;
-            height: 30vh;
-            justify-content: center;
             align-items: center;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .section2 {
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #343a40;
+        }
+
+        .output-section {
+            width: 100%;
             display: flex;
-            width: 70%;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
         }
 
         table {
             width: 100%;
-            margin: 0 auto;
-
-            border-collapse: separate;
-
-            border-spacing: 0 4px;
-
-            margin-bottom: 20px;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th,
         td {
-
-            padding: 20px;
+            padding: 10px;
             text-align: left;
+            border-bottom: 1px solid #ccc;
         }
 
-        tr {
+        th {
             background-color: #343a40;
             color: white;
-            font-size: x-small;
-            font-weight: lighter;
-            letter-spacing: 2px;
-
         }
 
-        .i {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 40px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .o {
-            width: 100%;
-            /* border: 2px solid black; */
-            height: 40px;
-        }
-
-        input {
-            height: 100%;
-            width: 80%;
-            margin-right: 5px;
-
-        }
-
-        form {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        button {
-            height: 45px;
-            width: 20%;
-            font-size: larger;
-            font-weight: lighter;
-
-        }
-
-
-        p {
+        #copyToClipBoard {
+            margin-left: 5px;
+            margin-top: 10px;
+            background-color: #343a40;
             color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
         }
-        #copyToClipBoard{
-            height: 30px;
-            width: 50px;
-            font-size: 3px;
-            margin-left: 10px;
+
+        #copyToClipBoard:hover {
+            color: #343a40;
+            background-color: white;
         }
     </style>
 </head>
 
-<body style="background-color: #2b3035;">
-    <div class="main">
-        <div class="section1">
-            <div class="i">
-                <form action="/url/shorten" method="post">
-                    <input type="text" name="originalURL" id="originalURL" placeholder="https://www.example.com">
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-            <div class="o">
-                <% if (locals.id) { %>
-                    <p>Generated URL : <a id="shortId" href="http://localhost:3000/url/<%= id %>"
-                            style="color: white;">http://localhost:3000/url/<%= id %></a> <button id="copyToClipBoard"
-                            onclick="copyToClipBoard()">Copy text</button>
-                    </p>
-                    <% } %>
-            </div>
+<body>
+    <div class="navbar">
+        <h2>URL Shortener</h2>
+    </div>
+    <div class="container">
+        <div class="form-section">
+            <form action="/url/shorten" method="post">
+                <input type="text" name="originalURL" id="originalURL" placeholder="https://www.example.com">
+                <button type="submit">Submit</button>
+            </form>
         </div>
-        <div class="section2">
+        <div class="output-section">
+            <% if (locals.id) { %>
+            <p>Generated URL:
+                <a id="shortId" href="http://localhost:3000/url/<%= id %>">
+                    http://localhost:3000/url/<%= id %>
+                </a>
+                <button id="copyToClipBoard" onclick="copyToClipBoard()">Copy text</button>
+            </p>
+            <% } %>
+        </div>
+        <div class="table-section">
             <% if (allUrls.length) { %>
-                <table>
+            <table>
+                <thead>
                     <tr>
                         <th>#</th>
                         <th>Shorten Url</th>
                         <th>Original Url</th>
                         <th>Clicks</th>
                     </tr>
+                </thead>
+                <tbody>
                     <% allUrls.forEach((url, index)=> { %>
-                        <tr>
-                            <td>
-                                <%= index + 1 %>
-                            </td>
-                            <td>
-                                <%= url.shortURLKey %>
-                            </td>
-                            <td>
-                                <%= url.originalURL %>
-                            </td>
-                            <td>
-                                <%= url.clickCount %>
-                            </td>
-                        </tr>
-                        <% }); %>
-                </table>
-                <% } %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td>
+                            <%= url.shortURLKey %>
+                        </td>
+                        <td>
+                            <%= url.originalURL %>
+                        </td>
+                        <td>
+                            <%= url.clickCount %>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+            <p>OOPs! No URLs Generated Yet</p>
+            <% } %>
         </div>
     </div>
+
     <script>
         function copyToClipBoard() {
-            // Get the URL text
             var urlText = document.getElementById("shortId").innerText;
-
-            // Create a hidden input element
             var tempInput = document.createElement("input");
             tempInput.value = urlText;
             document.body.appendChild(tempInput);
-
-            // Select the input field
             tempInput.select();
-            tempInput.setSelectionRange(0, 99999); // For mobile devices
-
-            // Copy the text inside the input field
+            tempInput.setSelectionRange(0, 99999);
             document.execCommand("copy");
-
-            // Remove the temporary input element
             document.body.removeChild(tempInput);
-
-            const btn=document.getElementById("copyToClipBoard");
-            btn.innerHTML="Text copied!"
-
-
-            // Alert the user
+            const btn = document.getElementById("copyToClipBoard");
+            btn.innerHTML = "Text copied!";
             alert("Copied the text: " + urlText);
         }
     </script>
-
 </body>
 
 </html>

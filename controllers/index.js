@@ -2,6 +2,7 @@ const Url = require("../models/url")
 const shortid = require("shortid");
 const validator = require("validator");
 
+
 const access = async (req, res) => {
     const id = req.params.id;
     const url = await Url.findOne({ shortURLKey: id });
@@ -40,18 +41,23 @@ const createShortenUrl = async (req, res) => {
                     shortURLKey,
                     createdAt: new Date(),
                     clickCount: 0,
+                    generatedBy:req.user._id
                 });
                 await url.save();
             }
-            const allUrls = await Url.find({});
-            res.render("home.ejs", { id: shortURLKey, allUrls: allUrls });
+            const id=req.user._id;
+            const allUrls=await Url.find({generatedBy:id});
+            console.log("------------");
+            console.log(id);
+            console.log(allUrls);
+            res.render("home.ejs", { id: shortURLKey, allUrls: allUrls ,name:req.user._id});
         }
         catch (err) {
             console.log(err);
         }
     }
     else {
-        res.json("Not a valid URL");
+        res.render("invalidurl.ejs")
     }
 }
 
