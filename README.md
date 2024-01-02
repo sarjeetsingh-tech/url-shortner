@@ -8,7 +8,7 @@ This repository contains a simple URL shortener project implemented using Node.j
 
 ![image](https://github.com/sarjeetsingh-tech/url-shortner/assets/104495979/ba5fed73-eac7-4de0-aa03-a63411b51263)
 
-![image](https://github.com/sarjeetsingh-tech/url-shortner/assets/104495979/1042d9ba-c3f6-4ef0-86b6-5d0e65b718c8)
+![image](https://github.com/sarjeetsingh-tech/url-shortner/assets/104495979/2d69c812-b3ba-4c92-95c3-9bd765c1f53b)
 
 ![image](https://github.com/sarjeetsingh-tech/url-shortner/assets/104495979/49d72c0b-fe8f-4602-bb3e-6127b101777f)
 
