@@ -47,10 +47,11 @@ const createShortenUrl = async (req, res) => {
             }
             const id=req.user._id;
             const allUrls=await Url.find({generatedBy:id});
-            console.log("------------");
-            console.log(id);
-            console.log(allUrls);
-            res.render("home.ejs", { id: shortURLKey, allUrls: allUrls ,name:req.user._id});
+            // console.log("------------");
+            // console.log(id);
+            // console.log(allUrls);
+            console.log(req.user.username);
+            res.render("home.ejs", { id: shortURLKey, allUrls: allUrls ,name:req.user.username});
         }
         catch (err) {
             console.log(err);
