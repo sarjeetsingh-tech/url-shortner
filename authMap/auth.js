@@ -15,12 +15,16 @@ function setMap(user) {
     const payload = {
         email: user.email,
         username: user.username,
+        _id: user._id,
+        role: user.role
     };
     const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-    return token
+    return token;
 }
 function getMap(token) {
-    return jwt.verify(token, secretKey)
+    const x = jwt.verify(token, secretKey)
+    console.log(x);
+    return x;
 }
 module.exports = { setMap, getMap };
 

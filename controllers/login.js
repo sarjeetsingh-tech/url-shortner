@@ -5,12 +5,12 @@ async function login(req, res) {
     res.render("login.ejs");
 }
 async function loginSubmit(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const newUser = await User.findOne({
         email: req.body.email,
         password: req.body.password
     })
-    console.log(newUser);
+    // console.log(newUser);
     if (!newUser) return res.redirect("/login");
     // const sessionid = uuidv4();
     // res.cookie("uid", sessionid);
@@ -19,6 +19,7 @@ async function loginSubmit(req, res) {
     const token = setMap(newUser);
     res.cookie("uid",token);
     res.redirect("/url");
+    
 }
 
 module.exports = { login, loginSubmit };

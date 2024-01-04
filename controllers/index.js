@@ -24,7 +24,7 @@ const access = async (req, res) => {
 }
 
 const createShortenUrl = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { originalURL } = req.body;
 
     if (validator.isURL(originalURL)) {
@@ -50,7 +50,7 @@ const createShortenUrl = async (req, res) => {
             // console.log("------------");
             // console.log(id);
             // console.log(allUrls);
-            console.log(req.user.username);
+            // console.log(req.user.username);
             res.render("home.ejs", { id: shortURLKey, allUrls: allUrls ,name:req.user.username});
         }
         catch (err) {

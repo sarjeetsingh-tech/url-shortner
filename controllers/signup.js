@@ -3,7 +3,7 @@ async function signup(req, res) {
     res.render("signup.ejs");
 }
 async function signupSubmit(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const newUser=new User({
         username:req.body.username,
         email:req.body.email,

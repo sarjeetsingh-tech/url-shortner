@@ -1,0 +1,2 @@
+getting token from client side using Beared Authentication
+Authorization : Bearer <token>

@@ -6,4 +6,5 @@ router.get("/:id",access)
 
 router.post("/shorten",createShortenUrl);
 router.get("/:id/details",details )
+router.get("/all",)
 module.exports = router;
